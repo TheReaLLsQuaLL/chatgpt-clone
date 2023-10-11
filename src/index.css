@@ -11,6 +11,7 @@ body {
 }
 
 .app {
+    display: flex;
      background-color: #343;
 }
 
@@ -20,7 +21,50 @@ body {
 }
 
 .side-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background-color: #202123;
     height: 100vh;
     width: 20% ;
+}
+
+button {
+    border: solid 0.5px rgba(255, 255, 255, 0.5);
+    background-color: transparent;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+}
+
+nav {
+    border-top: solid 0.5px rgba(255, 255, 255, 0.5);
+    padding: 10px;
+    margin: 10px;
+}
+
+.history {
+    padding: 10px;
+    margin: 10px;
+    height: 100%;
+}
+
+.history li {
+    list-style-type: none;
+    padding: 15px 10px;
+    cursor: pointer;
+}
+
+
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+    .side-bar {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: #202123;
+        height: 100vh;
+        width: 40% ;
+    }
 }
