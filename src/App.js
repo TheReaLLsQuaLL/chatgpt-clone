@@ -1,6 +1,6 @@
 function App() {
   return (
-    <div className="App">
+    <div className="app">
       <section className="side-bar">
         <button>+ New Chat</button>
         <ul className="history "></ul>
