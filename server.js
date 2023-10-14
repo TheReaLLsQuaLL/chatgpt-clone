@@ -1,3 +1,5 @@
+const config = require("./config");
+
 const PORT = 8000;
 const express = require("express");
 const cors = require("cors");
@@ -5,7 +7,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const API_KEY = "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";
+const API_KEY = config.KEY;
 
 app.post("/completions", async (req, res) => {
   const options = {
