@@ -6,6 +6,12 @@ function App() {
   const [previousChats, setPreviousChats] = useState([]);
   const [currentTitle, setCurrentTitle] = useState(null);
 
+  function createNewChat() {
+    setMessage(null);
+    setValue("");
+    setCurrentTitle(null);
+  }
+
   const getMessages = async () => {
     const options = {
       method: "POST",
@@ -54,20 +60,35 @@ function App() {
 
   console.log(previousChats);
 
+  const currentChat = previousChats.filter(
+    (previousChat) => previousChat.title === currentTitle
+  );
+
+  const uniqueTitle = Array.from(
+    new Set(previousChats.map((previousChat) => previousChat.title))
+  );
+
+  console.log(uniqueTitle);
+
   return (
     <div className="app">
       <section className="side-bar">
-        <button>+ New Chat</button>
-        <ul className="history ">
-          <li>Example</li>
-        </ul>
+        <button onClick={createNewChat}>+ New Chat</button>
+        <ul className="history "></ul>
         <nav>
           <p>Made by Toprak YILDIZ</p>
         </nav>
       </section>
       <section className="main">
         {!currentTitle && <h1>Clone-GPT</h1>}
-        <ul className="feed"></ul>
+        <ul className="feed">
+          {currentChat.map((chatMessage, index) => (
+            <li key={index}>
+              <p className="role">{chatMessage.role}</p>
+              <p>{chatMessage.message}</p>
+            </li>
+          ))}
+        </ul>
         <div className="bottom-section">
           <div className="input-container">
             <input value={value} onChange={(e) => setValue(e.target.value)} />
