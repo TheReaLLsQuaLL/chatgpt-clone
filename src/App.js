@@ -1,6 +1,9 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 
 function App() {
+  const [value, setValue] = useState(null);
+  const [message, setMessage] = useState(null);
+
   const getMessages = async () => {
     const options = {
       method: "POST",
@@ -19,10 +22,13 @@ function App() {
       );
       const data = await response.json();
       console.log(data);
+      setMessage(data.choices[0].message);
     } catch (error) {
       console.error(error);
     }
   };
+
+  console.log(value);
 
   return (
     <div className="app">
@@ -40,7 +46,7 @@ function App() {
         <ul className="feed"></ul>
         <div className="bottom-section">
           <div className="input-container">
-            <input />
+            <input value={value} onChange={(e) => setValue(e.target.value)} />
             <div id="submit" onClick={getMessages}>
               ➢
             </div>
