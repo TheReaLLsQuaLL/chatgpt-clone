@@ -26,7 +26,7 @@ function App() {
   }
 
   const getMessages = async () => {
-    if (!value === "") {
+    if (!value == "") {
       const options = {
         method: "POST",
         body: JSON.stringify({

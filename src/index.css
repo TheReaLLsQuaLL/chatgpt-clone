@@ -102,7 +102,13 @@ input:focus {
     bottom: 15px;
     right: 0;
     cursor: pointer;
+    background-color: green;
+}
+
+#submit:disabled,
+#submit[disabled]{
     background-color: transparent;
+    cursor: not-allowed;
 }
 
 .feed {
