@@ -9,7 +9,6 @@ function App() {
   function handleKeyPress(e) {
     if (e.key === "Enter") {
       getMessages();
-      console.log("Key hit");
     }
   }
 
@@ -26,28 +25,29 @@ function App() {
   }
 
   const getMessages = async () => {
-    if (!value == "") {
-      const options = {
-        method: "POST",
-        body: JSON.stringify({
-          message: value,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
+    if (!value) {
+      return;
+    }
+    const options = {
+      method: "POST",
+      body: JSON.stringify({
+        message: value,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
 
-      try {
-        const response = await fetch(
-          "http://localhost:8000/completions",
-          options
-        );
-        const data = await response.json();
-        console.log(data);
-        setMessage(data.choices[0].message);
-      } catch (error) {
-        console.error(error);
-      }
+    try {
+      const response = await fetch(
+        "http://localhost:8000/completions",
+        options
+      );
+      const data = await response.json();
+      console.log(data);
+      setMessage(data.choices[0].message);
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -73,8 +73,6 @@ function App() {
     }
   }, [message, currentTitle]);
 
-  console.log(previousChats);
-
   const currentChat = previousChats.filter(
     (previousChat) => previousChat.title === currentTitle
   );
@@ -82,8 +80,6 @@ function App() {
   const uniqueTitle = Array.from(
     new Set(previousChats.map((previousChat) => previousChat.title))
   );
-
-  console.log(uniqueTitle);
 
   return (
     <div className="app">
