@@ -28,11 +28,17 @@ function App() {
     if (!value) {
       return;
     }
+    const modifyChat = currentChat
+      ? currentChat.map((item) => {
+          return { role: item.role, content: item.content };
+        })
+      : [];
+    console.log(modifyChat, "ModifyChat");
+    const newCurrentChat = [...modifyChat, { role: "user", content: value }];
+    console.log(newCurrentChat, "New current Chat");
     const options = {
       method: "POST",
-      body: JSON.stringify({
-        message: value,
-      }),
+      body: JSON.stringify({ newCurrentChat }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -80,6 +86,10 @@ function App() {
   const uniqueTitle = Array.from(
     new Set(previousChats.map((previousChat) => previousChat.title))
   );
+
+  useEffect(() => {
+    console.log(currentChat, "currentChat");
+  }, [currentChat.length]);
 
   return (
     <div className="app">

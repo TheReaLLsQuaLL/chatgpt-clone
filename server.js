@@ -10,6 +10,8 @@ app.use(cors());
 const API_KEY = config.KEY;
 
 app.post("/completions", async (req, res) => {
+  const currentChat = req.body.newCurrentChat;
+  console.log(currentChat, "CurrentChat");
   const options = {
     method: "POST",
     headers: {
@@ -18,7 +20,7 @@ app.post("/completions", async (req, res) => {
     },
     body: JSON.stringify({
       model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: req.body.message }],
+      messages: currentChat,
       max_tokens: 100,
     }),
   };
